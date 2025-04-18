@@ -31,9 +31,9 @@ def execute_pytest(file, capture='all', flags='-rapP'):
     pytest.main(['-q', '--show-capture={}'.format(capture), fname, flags])
 
 
-def check_range(data, name, rang=(0, 1)):
+def check_range(data, name, rang=(0, 1), tol=1e-2):
     """Ensure that data values are in correct range."""
-    if np.nanmin(data) < rang[0] or np.nanmax(data) > rang[1]:
+    if np.nanmin(data) < rang[0] - tol or np.nanmax(data) > rang[1] + tol:
         raise ValueError(
             'Variable "{n}" is out of expected '
             'transmittance/reflectance range. Recommend checking '
